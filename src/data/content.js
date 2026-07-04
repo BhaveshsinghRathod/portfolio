@@ -87,6 +87,7 @@ export const projects = [
     status: "deployed",
     period: "Mar 2026 – May 2026",
     title: "Enterprise Multi-Model SOAR Automation",
+    interactiveDiagram: true,
     summary:
       "An end-to-end agentic SOAR pipeline that ingests security logs, ranks incidents by confidence score, and recommends mitigation — with a human-in-the-loop approval step before anything executes.",
     details: [
@@ -106,6 +107,7 @@ export const projects = [
     status: "deployed",
     period: "Dec 2025 – Feb 2026",
     title: "Wazuh Home Lab — Multi-OS Threat Detection & Log Analysis",
+    writeupSlug: "wazuh-home-lab",
     summary:
       "A local adversarial lab replicating enterprise-scale SOC monitoring: attack simulations against a monitored victim endpoint, tuned Wazuh detection logic, and documented findings mapped to MITRE ATT&CK.",
     details: [
@@ -234,3 +236,63 @@ export const tickerLines = [
   { sev: "high", text: "AI triage: incident #4471 ranked priority 1 — awaiting approval" },
   { sev: "info", text: "report generator: post-incident summary exported (PDF)" },
 ];
+
+// ─────────────────────────────────────────────────────────────
+// Interactive flow diagram data for the SOAR Automation project.
+// Edit node text/tools here; diagram layout lives in
+// src/components/SoarFlowDiagram.jsx
+// ─────────────────────────────────────────────────────────────
+export const soarFlow = {
+  nodes: {
+    ingest: {
+      title: "Log Ingestion",
+      icon: "database",
+      desc: "Wazuh SIEM streams live security logs into the pipeline in real time, across every monitored endpoint.",
+      tools: ["Wazuh SIEM", "REST API"],
+      log: { sev: "info", text: "ingest: streaming logs from 6 endpoints" },
+    },
+    triage: {
+      title: "AI Triage (Ollama)",
+      icon: "brain",
+      desc: "A local LLM ranks the top 5 priority incidents by confidence score. Nothing leaves the local environment — no data sent to a third-party API.",
+      tools: ["Ollama (local LLM)", "Python"],
+      log: { sev: "medium", text: "triage: ranked 5 incidents by confidence score" },
+    },
+    mitre: {
+      title: "MITRE ATT&CK Mapping",
+      icon: "target",
+      desc: "Each incident is tagged to a tactic — Initial Access, Execution, Persistence, or Lateral Movement — for structured, consistent categorization.",
+      tools: ["MITRE ATT&CK"],
+      log: { sev: "medium", text: "mitre: incident #4471 tagged — Lateral Movement" },
+    },
+    approval: {
+      title: "Human-in-the-Loop Approval",
+      icon: "user-check",
+      desc: "The AI presents its recommended action and confidence score. An operator must approve before anything executes — or escalate to manual review.",
+      tools: ["React dashboard", "REST API"],
+      log: { sev: "high", text: "approval: awaiting operator decision on #4471" },
+    },
+    respond: {
+      title: "Automated Response",
+      icon: "shield-check",
+      desc: "On approval, the system executes the mitigation immediately — alert suppression, IP blocking, or endpoint isolation.",
+      tools: ["Python", "Response script library"],
+      log: { sev: "low", text: "response: endpoint isolated — action complete in <90s" },
+    },
+    escalate: {
+      title: "Manual Escalation",
+      icon: "user",
+      desc: "On rejection, the incident routes to manual analyst review — the operator selects an alternative script or handles it directly.",
+      tools: ["Operator judgement"],
+      log: { sev: "medium", text: "escalation: routed to analyst for manual handling" },
+    },
+    report: {
+      title: "Executive Report",
+      icon: "file-text",
+      desc: "A one-page post-incident summary is auto-generated: threats detected, confidence scores, actions taken, and escalation decisions — for stakeholder communication.",
+      tools: ["Automated report generation"],
+      log: { sev: "info", text: "report: post-incident summary exported (PDF)" },
+    },
+  },
+  sequence: ["ingest", "triage", "mitre", "approval"],
+};

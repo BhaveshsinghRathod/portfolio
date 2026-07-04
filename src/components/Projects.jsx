@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { projects } from "../data/content";
 import StatusTag from "./StatusTag";
+import SoarFlowDiagram from "./SoarFlowDiagram";
 
 function CaseFile({ project, index }) {
   const [open, setOpen] = useState(index === 0);
@@ -74,6 +76,23 @@ function CaseFile({ project, index }) {
                   {l.label} →
                 </a>
               ))}
+            </div>
+          )}
+
+          {project.writeupSlug && (
+            <div className="mt-6">
+              <Link
+                to={`/writeups/${project.writeupSlug}`}
+                className="font-mono text-[13px] font-medium text-amber underline underline-offset-4 hover:text-ink"
+              >
+                Read the full write-up →
+              </Link>
+            </div>
+          )}
+
+          {project.interactiveDiagram && (
+            <div className="mt-8">
+              <SoarFlowDiagram />
             </div>
           )}
         </div>
