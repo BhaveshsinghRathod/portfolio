@@ -12,7 +12,6 @@ export const profile = {
   summary:
     "CompTIA Security+ certified Cybersecurity Engineering graduate student with hands-on experience building AI-augmented SOAR pipelines on Wazuh SIEM, custom Python and PowerShell automation over REST APIs, and multi-OS endpoint monitoring across Windows, macOS, Linux, iOS, and Android. My detection-automation work cut mean alert triage time by over 90% — from a 45-minute manual process down to under 90 seconds. Targeting SOC Analyst, Security Operations Analyst, Security Automation Engineer, and SIEM Engineer roles, with a focus on scalable detection engineering for an AI-native threat landscape.",
   email: "bhaveshsinghrathod@gmail.com",
-  phone: "312-823-7445",
   linkedin: "https://linkedin.com/in/REPLACE_ME",
   github: "https://github.com/REPLACE_ME",
   resumeFile: "/resume.pdf",
