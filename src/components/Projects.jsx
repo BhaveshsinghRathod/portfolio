@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { projects } from "../data/content";
 import StatusTag from "./StatusTag";
 import SoarFlowDiagram from "./SoarFlowDiagram";
+import VulnScannerFlowDiagram from "./VulnScannerFlowDiagram";
 
 function CaseFile({ project, index }) {
   const [open, setOpen] = useState(index === 0);
@@ -93,6 +94,11 @@ function CaseFile({ project, index }) {
           {project.interactiveDiagram && (
             <div className="mt-8">
               <SoarFlowDiagram />
+            </div>
+          )}
+          {project.vulnScannerDiagram && (
+            <div className="mt-8">
+              <VulnScannerFlowDiagram />
             </div>
           )}
         </div>

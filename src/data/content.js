@@ -85,6 +85,34 @@ export const skillGroups = [
 export const projects = [
   {
     status: "deployed",
+    period: "May 2026 – Jul 2026",
+    title: "Vulnerability Scanner + Risk Prioritization Tool",
+    writeupSlug: "vuln-scanner",
+    vulnScannerDiagram: true,
+    summary:
+      "A vulnerability scanner that goes past raw CVSS: it enriches every finding with real EPSS exploitation-probability data and live asset context, then produces a single explainable risk score — the same likelihood × impact × asset-value logic real vuln management teams use.",
+    details: [
+      "Built and validated end-to-end against a real three-machine home lab: a Kali attack box scanning a headless Ubuntu server running a live MicroK8s cluster + Apache, with a MacBook running enrichment, scoring, the dashboard, and a local LLM layer.",
+      "Proved the core value proposition with real data: a 19-year-old Apache Slowloris CVE (CVSS 5.0, 'medium') scored 68.7 (HIGH) and correctly outranked a brand-new 2026 OpenSSH CVE (CVSS 7.5, 'high') that scored only 50.2 (MEDIUM) — because the old bug has a 71.6% real-world EPSS exploitation probability versus under 0.5% for the new one.",
+      "Designed a dual-mode asset-context collector — real osquery locally, SSH + native-command fallback remotely — that normalizes both paths to an identical output schema, so installing osquery on a new remote target later requires zero downstream code changes.",
+      "Diagnosed and fixed a real network-topology false-negative: an initial scan silently missed 5 of 7 live services because of a hypervisor NAT address masking the VM's real bridged IP — root-caused via ip a / iptables and iptables-legacy inspection before concluding the block was upstream of the guest OS.",
+      "Built a 3-layer defense-in-depth architecture for the local LLM narration layer (deterministic input sanitization → a second, different model as verifier → a deterministic regex safety net) after discovering the primary model would reproduce Apache-specific remediation advice for non-Apache findings — the LLM narrates, it never scores.",
+    ],
+    tools: [
+      "nmap",
+      "NVD REST API",
+      "EPSS API",
+      "osquery",
+      "Python",
+      "SQLite",
+      "Streamlit",
+      "Plotly",
+      "Ollama (llama3.2-3b + phi4-mini)",
+    ],
+    links: [],
+  },
+  {
+    status: "deployed",
     period: "Mar 2026 – May 2026",
     title: "Enterprise Multi-Model SOAR Automation",
     interactiveDiagram: true,
